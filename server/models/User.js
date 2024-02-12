@@ -15,15 +15,13 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    location: {
-        country: {
-            type: String,
-            required: true
-        },
-        city: {
-            type: String,
-            required: true
-        }
+    city: {
+        type: String,
+        required: true
+    },
+    street: {
+        type: String,
+        required: true
     }
 });
 

@@ -19,7 +19,8 @@ export function SessionProvider(props: SessionProviderProps) {
             user: {
                 id: decodedToken.id,
                 email: decodedToken.email,
-                role: decodedToken.role,
+                city: decodedToken.city,
+                street:decodedToken.street,
                 username:decodedToken.username,
                 token
             }

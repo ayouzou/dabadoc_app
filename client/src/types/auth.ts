@@ -2,7 +2,8 @@ import React from "react";
 export type User = {
     id: string;
     email: string;
-    role: "ADMIN" | "SUBADMIN" ;
+    city:string;
+    street:string;
     token: string;
     username:string
 } | null;
