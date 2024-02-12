@@ -18,6 +18,17 @@ const createQuestion =async(req,res)=>{
       }
 }
 
+const getAllQuestions = async (req, res) => {
+  try {
+    const question = await Question.find();
+    res.status(200).json(question);
+  } catch (error) {
+    console.error("Error fetching question:", error);
+    res.status(500).json({ error: "Error fetching question" });
+  }
+};
+
 module.exports ={
-    createQuestion
+    createQuestion,
+    getAllQuestions
 }

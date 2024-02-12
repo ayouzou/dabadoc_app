@@ -1,7 +1,9 @@
 
 import  { useState } from 'react';
-
-const AnswerForm = () => {
+interface questionProps{
+  questionId:string
+}
+const AnswerForm:React.FC<questionProps>  = ({questionId}) => {
   const [content, setContent] = useState('');
 
   const handleSubmit = () => {
@@ -12,7 +14,7 @@ const AnswerForm = () => {
       <h2 className="text-lg font-semibold mb-4">Post an Answer</h2>
       <textarea
         placeholder="Your answer"
-        value={content}
+        value={questionId}
         onChange={e => setContent(e.target.value)}
         className="w-full border border-gray-300 p-2 mb-4 rounded"
         required

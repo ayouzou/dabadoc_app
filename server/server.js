@@ -26,6 +26,9 @@ const questionRouter = require("./routes/questionRoutes");
 app.use("/api/question", questionRouter);
 
 
+const answerRouter = require("./routes/answerRoutes");
+app.use("/api/answer", answerRouter);
+
 
 
 
