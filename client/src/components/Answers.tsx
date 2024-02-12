@@ -1,12 +1,26 @@
+import { useState } from 'react';
+import useAuth from '../hooks/useAuth';
+import { createAnswer } from '../api/CreateAnswer';
 
-import  { useState } from 'react';
-interface questionProps{
-  questionId:string
+interface QuestionProps {
+  questionId: string;
 }
-const AnswerForm:React.FC<questionProps>  = ({questionId}) => {
-  const [content, setContent] = useState('');
 
-  const handleSubmit = () => {
+const AnswerForm: React.FC<QuestionProps> = ({ questionId }) => {
+  const [content, setContent] = useState('');
+  const { auth } = useAuth();
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); 
+
+    try {
+      await createAnswer({ content, question: questionId, answeredBy: auth.user?.id });
+
+      setContent('');
+
+    } catch (error) {
+      console.error('Error creating answer:', error);
+    }
   };
 
   return (
@@ -14,7 +28,7 @@ const AnswerForm:React.FC<questionProps>  = ({questionId}) => {
       <h2 className="text-lg font-semibold mb-4">Post an Answer</h2>
       <textarea
         placeholder="Your answer"
-        value={questionId}
+        value={content}
         onChange={e => setContent(e.target.value)}
         className="w-full border border-gray-300 p-2 mb-4 rounded"
         required

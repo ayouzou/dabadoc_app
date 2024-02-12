@@ -3,6 +3,8 @@ import { FaThumbsUp } from 'react-icons/fa';
 import AnswerForm from './Answers';
 import { getQuestion } from '../api/getAllQuestion';
 import AnswerItem from './AnswerItem';
+import { likeQuestion } from '../api/likeQuestion';
+import useAuth from '../hooks/useAuth';
 
 interface Answer {
   _id: string;
@@ -23,9 +25,11 @@ interface Question {
 }
 
 const Question = () => {
+  const { auth } = useAuth()
   const [questions, setQuestions] = useState<Question[]>([]);
-  const [showAnswerForm, setShowAnswerForm] = useState(false);
-
+  const [showAnswerFormMap, setShowAnswerFormMap] = useState<{ [key: string]: boolean }>({});
+  const userOd= auth.user?.id
+  console.log(userOd)
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -39,8 +43,11 @@ const Question = () => {
     fetchData();
   }, []);
 
-  const toggleAnswerForm = () => {
-    setShowAnswerForm(!showAnswerForm);
+  const toggleAnswerForm = (questionId: string) => {
+    setShowAnswerFormMap(prevState => ({
+      ...prevState,
+      [questionId]: !prevState[questionId]
+    }));
   };
 
   return (
@@ -52,23 +59,23 @@ const Question = () => {
           <p className="text-gray-500">Posted by: {question.postedBy}</p>
           <p className="text-gray-500">Location: {question.city}, {question.street}</p>
           <div className="flex items-center mt-4">
-            <button className="flex items-center text-gray-500 mr-2">
+            <button onClick={() => likeQuestion({ questionId: question._id, userId: auth.user?.id})} className="flex items-center text-gray-500 mr-2">
               <FaThumbsUp className="mr-1" />
               {question.likes.length} Likes
             </button>
-            <button onClick={toggleAnswerForm} className="flex items-center bg-blue-500 text-white py-1 px-2 rounded hover:bg-blue-600">
+            <button onClick={() => toggleAnswerForm(question._id)} className="flex items-center bg-blue-500 text-white py-1 px-2 rounded hover:bg-blue-600">
               Answer
             </button>
           </div>
-          {showAnswerForm && (
+          {showAnswerFormMap[question._id] && (
             <div className="mt-4">
-              <AnswerForm questionId={question._id}/>
+              <AnswerForm questionId={question._id} />
             </div>
           )}
           <hr className="my-4" />
           <h4 className="text-lg font-semibold mb-2">Answers</h4>
-          {question.answers &&question.answers.map((answer) => (
-            <AnswerItem answer={answer}  />
+          {question.answers && question.answers.map((answer) => (
+            <AnswerItem key={answer._id} answer={answer} />
           ))}
         </div>
       ))}
