@@ -22,6 +22,9 @@ app.use(express.json());
 const userRouter = require("./routes/userRoutes");
 app.use("/api/users", userRouter);
 
+const questionRouter = require("./routes/questionRoutes");
+app.use("/api/question", questionRouter);
+
 
 
 
