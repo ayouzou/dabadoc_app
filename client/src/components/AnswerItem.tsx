@@ -5,12 +5,19 @@ import useAuth from '../hooks/useAuth';
 import { likeAnswer } from '../api/likeAnswer';
 
 interface AnswerProps {
-  answer: any;
+  answer: string;
 }
+
+interface AnswerData {
+  _id: string;
+  content: string;
+  likes: string[];
+ 
+} ;
 
 const AnswerItem: React.FC<AnswerProps> = ({ answer }) => {
   const { auth } = useAuth();
-  const [answerData, setAnswerData] = useState<any>(null);
+  const [answerData, setAnswerData] = useState<AnswerData | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,17 +29,17 @@ const AnswerItem: React.FC<AnswerProps> = ({ answer }) => {
       }
     };
     fetchData();
-  }, []);
+  }, [answer]);
   
   const isLikedByUser = answerData?.likes.includes(auth.user?.id);
 
   return (
     <div className="bg-gray-100 p-4 shadow rounded mb-2">
-      <p className="text-gray-600">{answerData?.content && answerData?.content}</p>
+      <p className="text-gray-600">{answerData?.content}</p>
       <div className="flex items-center mt-2">
-        <button className="flex items-center text-gray-500 mr-2" onClick={()=>likeAnswer({ answerId: answerData._id, userId: auth.user?.id })}>
+        <button className="flex items-center text-gray-500 mr-2" onClick={()=>likeAnswer({ answerId: answerData?._id, userId: auth.user?.id })}>
           <FaThumbsUp className="mr-1" style={{ color: isLikedByUser ? 'blue' : 'inherit' }} />
-          {answerData?.likes && answerData?.likes?.length} Likes
+          {answerData?.likes.length} Likes
         </button>
       </div>
     </div>

@@ -1,7 +1,13 @@
 const API_Key = import.meta.env.VITE_API_URL as string;
 
 const API =`${API_Key}/answer/create-answer`
-export const createAnswer = async ({ content, question, answeredBy }: any) => {
+
+interface answer {
+  content:string;
+  question:string;
+  answeredBy:string
+}
+export const createAnswer = async ({ content, question, answeredBy }: answer) => {
     try {
       const response = await fetch(API, {
         method: 'POST',
