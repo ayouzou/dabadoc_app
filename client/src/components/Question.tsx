@@ -5,6 +5,7 @@ import { getQuestion } from '../api/getAllQuestion';
 import AnswerItem from './AnswerItem';
 import { likeQuestion } from '../api/likeQuestion';
 import useAuth from '../hooks/useAuth';
+import UserPost from './userPost';
 
 interface Answer {
   _id: string;
@@ -86,11 +87,14 @@ const Question = () => {
           <h2 className='text-xl p-2'><span className='font-bold'>street</span>:{auth.user?.street}</h2>
         </div>
       </div>
+      <div>
+        <h1 className='text-4xl p-20 text-center '>See Questions Related to me </h1>
+      </div>
       {filteredQuestions.map((question) => (
         <div key={question._id} className="bg-white p-4 shadow-xl rounded mb-4">
           <h3 className="text-lg font-semibold">{question.title}</h3>
           <p className="text-gray-600 mb-2">{question.content}</p>
-          <p className="text-gray-500">Posted by: {question.postedBy}</p>
+          <p className="text-gray-500 flex gap-3">Posted by: <UserPost id={question.postedBy}/></p>
           <p className="text-gray-500">Location: {question.city}, {question.street}</p>
           <div className="flex items-center mt-4">
             <button onClick={() => handleLikeQuestion(question._id)} className="flex items-center text-gray-500 mr-2">

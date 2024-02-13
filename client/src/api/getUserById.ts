@@ -1,6 +1,6 @@
 const API_Key = import.meta.env.VITE_API_URL as string;
 
-const API = `${API_Key}/user`
+const API = `${API_Key}/users`
 
 
 export const getUserById = async (id: string) => {

@@ -1,6 +1,18 @@
 # dabadoc_app
 
 
+<<<<<<< HEAD
+=======
+# DabaDoc App Setup Guide
+
+Thank you for your interest in setting up the DabaDoc project on your local machine. Below are the instructions to get started.
+
+## Cloning the Repository
+
+First, clone the project repository from GitHub using the following command:
+
+```bash
+>>>>>>> 185ac0f6dde66991508b4dacb7054f062e5e238c
 git clone https://github.com/ayouzou/dabadoc_app.git
 
 1-Navigate to the client directory:
@@ -50,3 +62,7 @@ Similarly, you can also post answers to existing questions by navigating to the 
 # Viewing Questions Related to Location
 The DabaDoc app automatically filters questions based on the user's location.
 Upon logging in, you will see questions related to your current location displayed on the homepage.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 185ac0f6dde66991508b4dacb7054f062e5e238c
