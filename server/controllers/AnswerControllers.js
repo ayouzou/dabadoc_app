@@ -39,7 +39,33 @@ const getAnswerById = async (req, res) => {
     }
 };
 
+
+const likeAnswer = async (req, res) => {
+    try {
+      const { answerId } = req.body;
+      const { userId } = req.body; 
+  
+      const answer = await Answer.findById(answerId);
+      if (!answer) {
+        return res.status(404).json({ message: 'answer not found' });
+      }
+  
+      const userLiked = answer.likes.includes(userId);
+      if (userLiked) {
+        return res.status(400).json({ message: 'You have already liked this answer' });
+      }
+  
+      answer.likes.push(userId);
+      await answer.save();
+  
+      res.status(200).json({ message: 'answer liked successfully' });
+    } catch (error) {
+      console.error('Error liking answer:', error);
+      res.status(500).json({ message: 'Failed to like answer' });
+    }
+  };
 module.exports={
     createAnswer,
-    getAnswerById
+    getAnswerById,
+    likeAnswer
 }

@@ -52,29 +52,29 @@ const Question = () => {
 
   const filteredQuestions = questions.filter(question => {
     return (
-      question.city === auth.user?.city || 
-      question.street === auth.user?.street 
+      question.city === auth.user?.city ||
+      question.street === auth.user?.street
     );
   });
 
-  const handleLikeQuestion = async (questionId: string) => {
-    try {
-      await likeQuestion({ questionId, userId: auth.user?.id });
-      
-      const updatedQuestions = questions.map(question => {
-        if (question._id === questionId) {
-          return {
-            ...question,
-            likes: [...question.likes, auth.user?.id || '']
-          };
-        }
-        return question;
-      });
-      setQuestions(updatedQuestions);
-    } catch (error) {
-      console.error('Error liking question:', error);
-    }
-  };
+  // const handleLikeQuestion = async (questionId: string) => {
+  //   try {
+  //     await likeQuestion({ questionId, userId: auth.user?.id });
+
+  //     const updatedQuestions = questions.map(question => {
+  //       if (question._id === questionId) {
+  //         return {
+  //           ...question,
+  //           likes: [...question.likes, auth.user?.id || '']
+  //         };
+  //       }
+  //       return question;
+  //     });
+  //     setQuestions(updatedQuestions);
+  //   } catch (error) {
+  //     console.error('Error liking question:', error);
+  //   }
+  // };
 
   return (
     <div className='w-9/12 m-auto p-20 relative'>
@@ -94,11 +94,14 @@ const Question = () => {
         <div key={question._id} className="bg-white p-4 shadow-xl rounded mb-4">
           <h3 className="text-lg font-semibold">{question.title}</h3>
           <p className="text-gray-600 mb-2">{question.content}</p>
-          <p className="text-gray-500 flex gap-3">Posted by: <UserPost id={question.postedBy}/></p>
+          <p className="text-gray-500 flex gap-3">Posted by: <UserPost id={question.postedBy} /></p>
           <p className="text-gray-500">Location: {question.city}, {question.street}</p>
           <div className="flex items-center mt-4">
-            <button onClick={() => handleLikeQuestion(question._id)} className="flex items-center text-gray-500 mr-2">
-              <FaThumbsUp className="mr-1" />
+            <button
+              onClick={() => likeQuestion({ questionId: question._id, userId: auth.user?.id })}
+              className="flex items-center mr-2 py-1 px-2 rounded "
+            >
+              <FaThumbsUp className={`mr-1 ${question.likes.includes(auth.user?.id) ? 'text-blue-500' : 'text-gray-500'}`} />
               {question.likes.length} Likes
             </button>
             <button onClick={() => toggleAnswerForm(question._id)} className="flex items-center bg-black text-white py-1 px-2 rounded hover:bg-zinc-600">
