@@ -33,7 +33,7 @@ const AnswerForm: React.FC<QuestionProps> = ({ questionId }) => {
         className="w-full border border-gray-300 p-2 mb-4 rounded"
         required
       />
-      <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Post Answer</button>
+      <button type="submit" className="bg-black text-white py-2 px-4 rounded hover:bg-zinc-600">Post Answer</button>
     </form>
   );
 };

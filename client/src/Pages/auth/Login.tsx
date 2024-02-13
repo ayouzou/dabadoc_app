@@ -12,7 +12,6 @@ const Login = () => {
     })
     auth.isAuthenticated ? window.location.href = '/' : ''
     const API = import.meta.env.VITE_API_URL as string;
-    console.log(API)
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         try {
@@ -36,7 +35,7 @@ const Login = () => {
     return (
         <form onSubmit={handleSubmit}>
             <div className="bg-white rounded-2xl mx-auto mt-32 h-[530px] shadow-2xl flex flex-col w-full md:w-1/3 items-center max-w-4xl transition duration-1000 ease-out">
-                <h2 className='p-6 text-3xl font-bold text-black uppercase'>aweb</h2>
+                <h2 className='p-6 text-3xl font-bold text-black uppercase'>DabaDoc</h2>
                 <div className="inline-block border-[1px] justify-center w-20 border-black border-solid"></div>
                 <h3 className='text-2xl font-semibold text-blue-400 p-5'>Sign In!</h3>
                 <div className='flex flex-col items-center justify-center  w-9/12'>

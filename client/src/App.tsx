@@ -7,6 +7,8 @@ import Login from './Pages/auth/Login'
 import Home from './Pages/Home'
 import Navbar from './components/Navbar'
 import QuestionForm from './components/QuestionForm'
+import { Toaster } from 'react-hot-toast'
+import AllQuestion from './Pages/AllQuestion'
 
 function App() {
 
@@ -14,11 +16,15 @@ function App() {
     <>
       <SessionProvider>
         <BrowserRouter>
+        <Toaster />
+
           <Navbar/>
           <Routes>
             <Route path={'/register'} element={<Register />}/>
             <Route path={'/login'} element={<Login />}/>      
             <Route path={'/'} element={<Home />}/>  
+            <Route path={'/All'} element={<AllQuestion />}/>  
+
             {/* <Route path={'/'} element={<Home />}/>             */}
             <Route path={'/post-question'} element={<QuestionForm />}/>            
 

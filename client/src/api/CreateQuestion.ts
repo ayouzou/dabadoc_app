@@ -1,3 +1,5 @@
+import toast from "react-hot-toast";
+
 const API_Key = import.meta.env.VITE_API_URL as string;
 
 
@@ -13,12 +15,12 @@ export const createQuestion = async (data: any) => {
         });
 
         if (res.ok) {
-            console.log('Blog added successfully');
+            toast.success("question added success")
         } else {
-            console.log('Failed to add blog');
+            toast.error('Failed to add question');
         }
     } catch (error) {
-        console.error('Error creating blog:', error);
+        console.error('Error creating question:', error);
 
     }
 

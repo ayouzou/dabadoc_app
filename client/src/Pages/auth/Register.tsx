@@ -2,11 +2,11 @@ import { useState } from "react"
 import useAuth from "../../hooks/useAuth"
 import { storeCookie } from "../../lib/auth"
 import { Link } from "react-router-dom"
+import toast from "react-hot-toast"
 
 
 function Register() {
   const { auth } = useAuth()
-  console.log(auth)
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -15,7 +15,6 @@ function Register() {
     street:''
   })
   
-  console.log(formData)
   auth.isAuthenticated ? window.location.href = '/' : ''
   const API = import.meta.env.VITE_API_URL as string;
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -32,12 +31,11 @@ function Register() {
       const data = await res.json()
       if (res.status === 201) {
         window.location.href = `/`
-        console.log("register done!")
       }
 
       if (data.token) {
         storeCookie("token", data.token)
-        alert("Login success")
+        toast.success("login success")
       }
     } catch (error) {
       console.log(error)

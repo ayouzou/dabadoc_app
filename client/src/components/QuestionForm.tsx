@@ -20,11 +20,12 @@ const QuestionForm = () => {
         e.preventDefault()
         try {
             await createQuestion(formData)
+                window.location.href ='/'
         } catch (error) {
 
         }
     };
-
+    auth.isAuthenticated ?'':window.location.href='/login'
     return (
         <div className='w-96 m-auto mt-20'>
             <form onSubmit={handleSubmit} className="bg-white p-4 shadow rounded">
