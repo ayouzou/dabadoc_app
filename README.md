@@ -1,8 +1,4 @@
 # dabadoc_app
-
-
-<<<<<<< HEAD
-=======
 # DabaDoc App Setup Guide
 
 Thank you for your interest in setting up the DabaDoc project on your local machine. Below are the instructions to get started.
@@ -11,8 +7,6 @@ Thank you for your interest in setting up the DabaDoc project on your local mach
 
 First, clone the project repository from GitHub using the following command:
 
-```bash
->>>>>>> 185ac0f6dde66991508b4dacb7054f062e5e238c
 git clone https://github.com/ayouzou/dabadoc_app.git
 
 1-Navigate to the client directory:
@@ -26,7 +20,7 @@ npm install lodash
 Set up environment variable:
 
 Create a .env file in the client directory.
-Add the following line to the .env file:
+
 i will provide the .env information with email 
 
 #SETUP CLIENT
@@ -40,29 +34,36 @@ npm install
 Set up environment variables:
 
 Create a .env file in the server directory.
-Add the following lines to the .env file:
 
 i will provide the .env information with email 
 
 start the app use npm run dev for both client and server
 
-#Account Creation and Login
-Once the server is running, open a web browser and navigate to the DabaDoc app.
-Click on the "Sign Up" link to create a new account.
+Account Creation and Login
+To create an account:
+
+Open the DabaDoc app in a web browser.
+Click on "Sign Up."
 Fill in the required information and submit the form.
-After creating an account, you can log in by clicking on the "Login" link and entering your credentials.
+To log in:
+
+Click on "Login."
+Enter your credentials.
 
 
-#Posting Questions and Answers
-After logging in, navigate to the "Post Question" section of the app.
-Fill in the details of your question and submit the form.
-Similarly, you can also post answers to existing questions by navigating to the "Answer Question" section and filling out the answer form.
+
+Posting Questions and Answers
+To post a question:
+
+Log in to the DabaDoc app.
+Navigate to the "Post Question" section.
+Fill in your question details and submit the form.
+To post an answer:
+
+Log in to the DabaDoc app.
+Navigate to the "Answer Question" section.
+Fill out the answer form for the respective question.
 
 
 # Viewing Questions Related to Location
 The DabaDoc app automatically filters questions based on the user's location.
-Upon logging in, you will see questions related to your current location displayed on the homepage.
-<<<<<<< HEAD
-=======
-
->>>>>>> 185ac0f6dde66991508b4dacb7054f062e5e238c
