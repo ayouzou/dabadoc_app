@@ -23,6 +23,7 @@ interface Question {
   postedBy: string;
   likes: string[];
   answers: Answer[];
+  createdAt: string
 }
 
 const Question = () => {
@@ -108,6 +109,11 @@ const Question = () => {
               Answer
             </button>
           </div>
+          <div className='float-right text-gray-500'>
+            {
+              new Date(question.createdAt).toLocaleDateString('fr-FR', { month: 'long', year: 'numeric', day: 'numeric' })
+            }
+          </div>
           {showAnswerFormMap[question._id] && (
             <div className="mt-4">
               <AnswerForm questionId={question._id} />
@@ -118,6 +124,8 @@ const Question = () => {
           {question.answers && question.answers.map((answer) => (
             <AnswerItem key={answer._id} answer={answer} />
           ))}
+
+
         </div>
       ))}
 

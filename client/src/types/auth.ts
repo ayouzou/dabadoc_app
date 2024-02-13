@@ -10,7 +10,7 @@ export type User = {
 
 export type Session = {
     isAuthenticated: boolean;
-    user: User;
+    user: User | any;
 };
 
 export type SessionProviderProps = {

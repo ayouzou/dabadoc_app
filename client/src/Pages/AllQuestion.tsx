@@ -23,6 +23,7 @@ interface Question {
     postedBy: string;
     likes: string[];
     answers: Answer[];
+    createdAt:string
 }
 
 const AllQuestion = () => {
@@ -81,6 +82,11 @@ const AllQuestion = () => {
                         <button onClick={() => toggleAnswerForm(question._id)} className="flex items-center bg-black text-white py-1 px-2 rounded hover:bg-zinc-600">
                             Answer
                         </button>
+                    </div>
+                    <div className='float-right text-gray-500'>
+                        {
+                            new Date(question.createdAt).toLocaleDateString('fr-FR', { month: 'long', year: 'numeric', day: 'numeric' })
+                        }
                     </div>
                     {showAnswerFormMap[question._id] && (
                         <div className="mt-4">

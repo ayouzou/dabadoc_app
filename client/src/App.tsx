@@ -16,17 +16,16 @@ function App() {
     <>
       <SessionProvider>
         <BrowserRouter>
-        <Toaster />
-
-          <Navbar/>
+          <Toaster />
+          <Navbar />
           <Routes>
-            <Route path={'/register'} element={<Register />}/>
-            <Route path={'/login'} element={<Login />}/>      
-            <Route path={'/'} element={<Home />}/>  
-            <Route path={'/All'} element={<AllQuestion />}/>  
+            <Route path={'/register'} element={<Register />} />
+            <Route path={'/login'} element={<Login />} />
+            <Route path={'/'} element={<Home />} />
+            <Route path={'/All'} element={<AllQuestion />} />
 
             {/* <Route path={'/'} element={<Home />}/>             */}
-            <Route path={'/post-question'} element={<QuestionForm />}/>            
+            <Route path={'/post-question'} element={<QuestionForm />} />
 
           </Routes>
         </BrowserRouter>
