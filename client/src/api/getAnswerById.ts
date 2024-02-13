@@ -1,4 +1,7 @@
-const API = "http://localhost:3000/api/answer/get-answer";
+const API_Key = import.meta.env.VITE_API_URL as string;
+
+
+const API = `${API_Key}/answer/get-answer`;
 
 export const getAnswerById = async (answerId:string) => {
     try {

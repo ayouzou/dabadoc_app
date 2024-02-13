@@ -1,5 +1,4 @@
 import Question from "../components/Question"
-import QuestionForm from "../components/QuestionForm"
 import useAuth from "../hooks/useAuth"
 
 const Home = () => {
@@ -7,7 +6,10 @@ const Home = () => {
     console.log(auth.user)
   return (
     <div>
-        <Question/>
+      {
+        auth.isAuthenticated ?   <Question/> :window.location.href='/login'
+      }
+     
     </div>
   )
 }

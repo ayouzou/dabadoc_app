@@ -1,16 +1,22 @@
 import { useState } from "react"
 import { storeCookie } from "../../lib/auth"
 import toast from "react-hot-toast"
+import useAuth from "../../hooks/useAuth"
+import { Link } from "react-router-dom"
 
 const Login = () => {
+    const {auth} =useAuth()
     const [formData, setFormData] = useState({
         email: "",
         password: ""
     })
+    auth.isAuthenticated ? window.location.href = '/' : ''
+    const API = import.meta.env.VITE_API_URL as string;
+    console.log(API)
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         try {
-            const res = await fetch("http://localhost:3000/api/users/login", {
+            const res = await fetch(`${API}/users/login`, {
                 method: "POST",
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)
@@ -19,7 +25,7 @@ const Login = () => {
             if (data.token) {
                 storeCookie("token", data.token)
                 toast.success("Login success")
-                // window.location.href = `/dash/blogs`
+                window.location.href = `/`
             }else{
                 toast.error(data.message)
             }
@@ -47,7 +53,7 @@ const Login = () => {
                     </button>
                 </div>
                 <div className="inline-block border-[1px] justify-center w-20 border-black border-solid"></div>
-                {/* <p className='text-black mt-10 mb-4 text-xl font-medium cursor-pointer' >Create a New Account?</p> */}
+                <Link to={'/register'} className='text-black mt-10 mb-4 text-xl font-medium cursor-pointer'>Create a New Account?</Link>
             </div>
         </form>
     )

@@ -1,6 +1,7 @@
 import { useState } from "react"
 import useAuth from "../../hooks/useAuth"
 import { storeCookie } from "../../lib/auth"
+import { Link } from "react-router-dom"
 
 
 function Register() {
@@ -13,13 +14,14 @@ function Register() {
     city:'',
     street:''
   })
-  // const { auth } = useAuth()
+  
   console.log(formData)
-  // auth.isAuthenticated ? window.location.href = '/' : ''
+  auth.isAuthenticated ? window.location.href = '/' : ''
+  const API = import.meta.env.VITE_API_URL as string;
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     try {
-      const res = await fetch("http://localhost:3000/api/users/register", {
+      const res = await fetch(`${API}/users/register`, {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'
@@ -29,9 +31,8 @@ function Register() {
 
       const data = await res.json()
       if (res.status === 201) {
-        // window.location.href = `/`
+        window.location.href = `/`
         console.log("register done!")
-        console.log(auth)
       }
 
       if (data.token) {
@@ -47,7 +48,7 @@ function Register() {
     <>
       <div className="flex justify-center items-center h-screen">
         <div className="bg-gray-100 p-8 rounded shadow-xl">
-          <div className="text-2xl font-bold mb-4">Register</div>
+          <div className="text-2xl font-bold mb-4 flex justify-center">Register</div>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <input
@@ -94,11 +95,13 @@ function Register() {
             </div>
             <button
               type="submit"
-              className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+              className="w-full bg-black text-white py-2 rounded hover:bg-zinc-900 "
             >
               Register
             </button>
           </form>
+          <Link to={'/login'} className='text-black mt-10 mb-4 text-xl flex justify-center font-medium cursor-pointer'>Have Account?</Link>
+
         </div>
       </div>
 

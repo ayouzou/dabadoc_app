@@ -1,4 +1,7 @@
-const API ="http://localhost:3000/api/question";
+const API_Key = import.meta.env.VITE_API_URL as string;
+
+
+const API =`${API_Key}/question`;
 
 export const getQuestion = async () => {
     try {

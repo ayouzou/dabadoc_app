@@ -1,5 +1,6 @@
-const API ="http://localhost:3000/api/answer/create-answer"
+const API_Key = import.meta.env.VITE_API_URL as string;
 
+const API =`${API_Key}/answer/create-answer`
 export const createAnswer = async ({ content, question, answeredBy }: any) => {
     try {
       const response = await fetch(API, {

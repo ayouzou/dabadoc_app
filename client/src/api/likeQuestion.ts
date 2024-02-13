@@ -1,8 +1,9 @@
-const API ="http://localhost:3000/api/question/like-question"
+const API_Key = import.meta.env.VITE_API_URL as string;
+
+const API =`${API_Key}/question/like-question`
 
 export const likeQuestion = async ({ questionId, userId }: { questionId: string; userId: string; }) => {
     try {
-        console.log(questionId, userId)
       const response = await fetch(API, {
         method: 'POST',
         headers: {

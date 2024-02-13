@@ -8,7 +8,6 @@ interface AnswerProps {
 const AnswerItem: React.FC<AnswerProps> = ({ answer }) => {
 
     const [answer1, setAnswer] = useState<any>(null);
-    console.log("key",answer)
   useEffect(() => {
     const fetchData = async () => {
       try {

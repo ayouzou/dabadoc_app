@@ -1,9 +1,8 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
 import useAuth from '../hooks/useAuth'
 
 const Navbar = () => {
-    const {auth ,logout} =useAuth()
+    const { logout} =useAuth()
     return (
         <div>
             <nav className="bg-blue-500 p-4">
