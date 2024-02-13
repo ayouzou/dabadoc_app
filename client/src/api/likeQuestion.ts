@@ -4,7 +4,7 @@ const API_Key = import.meta.env.VITE_API_URL as string;
 
 const API =`${API_Key}/question/like-question`
 
-export const likeQuestion = async ({ questionId, userId }: { questionId: string; userId: string; }) => {
+export const likeQuestion = async ({ questionId, userId }: { questionId: string; userId: string | undefined; }) => {
     try {
       const response = await fetch(API, {
         method: 'POST',

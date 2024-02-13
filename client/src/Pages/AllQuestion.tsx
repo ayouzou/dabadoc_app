@@ -69,11 +69,13 @@ const AllQuestion = () => {
                     <h3 className="text-lg font-semibold">{question.title}</h3>
                     <p className="text-gray-600 mb-2">{question.content}</p>
                     <p className="text-gray-500 flex gap-3">Posted by: <UserPost id={question.postedBy} /></p>
-
                     <p className="text-gray-500">Location: {question.city}, {question.street}</p>
                     <div className="flex items-center mt-4">
-                        <button onClick={() => likeQuestion({ questionId: question._id, userId: auth.user?.id })} className="flex items-center text-gray-500 mr-2">
-                            <FaThumbsUp className="mr-1" />
+                        <button
+                            onClick={() => likeQuestion({ questionId: question._id, userId: auth.user?.id })}
+                            className="flex items-center mr-2 py-1 px-2 rounded "
+                        >
+                            <FaThumbsUp className={`mr-1 ${question.likes.includes(auth.user?.id) ? 'text-blue-500' : 'text-gray-500'}`} />
                             {question.likes.length} Likes
                         </button>
                         <button onClick={() => toggleAnswerForm(question._id)} className="flex items-center bg-black text-white py-1 px-2 rounded hover:bg-zinc-600">
