@@ -1,3 +1,5 @@
+import toast from "react-hot-toast";
+
 const API_Key = import.meta.env.VITE_API_URL as string;
 
 const API =`${API_Key}/answer/create-answer`
@@ -20,7 +22,8 @@ export const createAnswer = async ({ content, question, answeredBy }: answer) =>
       if (!response.ok) {
         throw new Error('Failed to create answer');
       }
-  
+      
+      toast.success("answer created")
       const data = await response.json();
       return data;
     } catch (error) {

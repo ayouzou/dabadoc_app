@@ -42,7 +42,7 @@ const Question = () => {
     };
 
     fetchData();
-  }, []);
+  }, [auth]);
 
   const toggleAnswerForm = (questionId: string) => {
     setShowAnswerFormMap(prevState => ({
@@ -53,30 +53,9 @@ const Question = () => {
 
   const filteredQuestions = questions.filter(question => {
     return (
-      question.city === auth.user?.city ||
-      question.street === auth.user?.street
+      question.city === auth.user?.city ||question.street === auth.user?.street
     );
   });
-
-  // const handleLikeQuestion = async (questionId: string) => {
-  //   try {
-  //     await likeQuestion({ questionId, userId: auth.user?.id });
-
-  //     const updatedQuestions = questions.map(question => {
-  //       if (question._id === questionId) {
-  //         return {
-  //           ...question,
-  //           likes: [...question.likes, auth.user?.id || '']
-  //         };
-  //       }
-  //       return question;
-  //     });
-  //     setQuestions(updatedQuestions);
-  //   } catch (error) {
-  //     console.error('Error liking question:', error);
-  //   }
-  // };
-
   return (
     <div className='w-9/12 m-auto p-20 relative'>
       <div className='absolute h-80 w-96 bg-white shadow-xl rounded-md left-[900px] top-3'>
@@ -124,8 +103,6 @@ const Question = () => {
           {question.answers && question.answers.map((answer) => (
             <AnswerItem key={answer._id} answer={answer} />
           ))}
-
-
         </div>
       ))}
 

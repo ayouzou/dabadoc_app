@@ -5,7 +5,7 @@ import useAuth from '../hooks/useAuth';
 import { likeAnswer } from '../api/likeAnswer';
 
 interface AnswerProps {
-  answer: string;
+  answer: any;
 }
 
 interface AnswerData {
