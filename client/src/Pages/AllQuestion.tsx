@@ -6,6 +6,8 @@ import useAuth from '../hooks/useAuth';
 import AnswerForm from '../components/Answers';
 import AnswerItem from '../components/AnswerItem';
 import UserPost from '../components/userPost';
+import FilterQuestion from '../components/FilterQuestion';
+import InformationUser from '../components/InformationUser';
 
 interface Answer {
     _id: string;
@@ -23,18 +25,21 @@ interface Question {
     postedBy: string;
     likes: string[];
     answers: Answer[];
-    createdAt:string
+    createdAt: string;
 }
 
 const AllQuestion = () => {
-    const { auth } = useAuth()
+    const { auth } = useAuth();
     const [questions, setQuestions] = useState<Question[]>([]);
+    const [filteredQuestions, setFilteredQuestions] = useState<Question[]>([]);
     const [showAnswerFormMap, setShowAnswerFormMap] = useState<{ [key: string]: boolean }>({});
+    const [openInfo,setOpenInfo] = useState(false)
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const data = await getQuestion();
                 setQuestions(data);
+                setFilteredQuestions(data);
             } catch (error) {
                 console.error('Error fetching questions:', error);
             }
@@ -44,28 +49,31 @@ const AllQuestion = () => {
     }, []);
 
     const toggleAnswerForm = (questionId: string) => {
-        setShowAnswerFormMap(prevState => ({
+        setShowAnswerFormMap((prevState) => ({
             ...prevState,
-            [questionId]: !prevState[questionId]
+            [questionId]: !prevState[questionId],
         }));
     };
 
-    auth.isAuthenticated ? "" : window.location.href = '/login'
+    const handleFilter = (filterText: string) => {
+        const filtered = questions.filter(
+            (question) => question.city.toLowerCase().includes(filterText.toLowerCase()) || question.street.toLowerCase().includes(filterText.toLowerCase())
+        );
+        setFilteredQuestions(filtered);
+    };
+    auth.isAuthenticated ?  "" :window.location.href ='/login'
     return (
-        <div className='w-9/12 m-auto p-20 relative '>
-            <div className='absolute h-80 w-96 bg-white shadow-xl rounded-md left-[900px] top-3'>
-                <h1 className='text-center text-2xl'>Information: </h1>
-                <div className='p-10'>
-                    <h2 className='text-xl p-2'><span className='font-bold'>email</span>:{auth.user?.email}</h2>
-                    <h2 className='text-xl p-2'><span className='font-bold'>username</span>:{auth.user?.username}</h2>
-                    <h2 className='text-xl p-2'><span className='font-bold'>city</span>:{auth.user?.city}</h2>
-                    <h2 className='text-xl p-2'><span className='font-bold'>street</span>:{auth.user?.street}</h2>
-                </div>
-            </div>
+        <div className="w-9/12 m-auto p-20 relative ">
+            <button onClick={()=>setOpenInfo(!openInfo)} className='bg-black text-white p-2 rounded-sm hover:bg-zinc-700'>{openInfo?'close-SeeInofrmation':"see-Inofrmation"}</button>
+            {
+
+                openInfo ? <InformationUser /> : ""
+            }
             <div>
-                <h1 className='text-4xl p-20 text-center '>See All  Questions  </h1>
+                <h1 className="text-4xl p-20 text-center ">See All Questions </h1>
             </div>
-            {questions.map((question, index) => (
+            <FilterQuestion onFilter={handleFilter} />
+            {filteredQuestions.map((question, index) => (
                 <div key={index} className="bg-white p-4 shadow-xl rounded mb-4">
                     <h3 className="text-lg font-semibold">{question.title}</h3>
                     <p className="text-gray-600 mb-2">{question.content}</p>

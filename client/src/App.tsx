@@ -9,6 +9,7 @@ import Navbar from './components/Navbar'
 import QuestionForm from './components/QuestionForm'
 import { Toaster } from 'react-hot-toast'
 import AllQuestion from './Pages/AllQuestion'
+import FavorisQuestion from './Pages/FavorisQuestion'
 
 function App() {
 
@@ -23,10 +24,8 @@ function App() {
             <Route path={'/login'} element={<Login />} />
             <Route path={'/'} element={<Home />} />
             <Route path={'/All'} element={<AllQuestion />} />
-
-            {/* <Route path={'/'} element={<Home />}/>             */}
+            <Route path={'/favoris'} element={<FavorisQuestion/>} />
             <Route path={'/post-question'} element={<QuestionForm />} />
-
           </Routes>
         </BrowserRouter>
       </SessionProvider>
